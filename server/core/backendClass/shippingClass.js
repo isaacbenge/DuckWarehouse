@@ -57,7 +57,7 @@ class AirShipping extends ShippingClass {
 
         let newCost = this.json.mod * quantity
         if (quantity > 1000){
-            cost *= 0.85;  // Apply 15% discount if quantity > 1000
+            newCost = newCost * 0.85;  // Apply 15% discount if quantity > 1000
         }
         return newCost
     }
