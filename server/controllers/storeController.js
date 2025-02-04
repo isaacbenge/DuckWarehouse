@@ -3,7 +3,7 @@ import OrderBuilderService from "../core/orderBuildService.js";
 
 const validSizes = ["xlarge", "large", "medium", "small", "xsmall"];
 const validShippingModes = ["air", "land", "sea"];
-const validDestinations = ["usa", "bolivia", "india", "other"];
+
 
 const createOrder = async (req, res) => {
     try {
@@ -24,9 +24,7 @@ const createOrder = async (req, res) => {
         if (!validShippingModes.includes(shippingMode)) {
             return res.status(400).json({ error: `Invalid shipping mode: ${shippingMode}. Expected one of ${validShippingModes.join(", ")}` });
         }
-        if (!validDestinations.includes(destination)) {
-            return res.status(400).json({ error: `Invalid destination: ${destination}. Expected one of ${validDestinations.join(", ")}` });
-        }
+      
 
         let orderBuilder = new OrderBuilderService();
         let order = orderBuilder.buildOrder(size, shippingMode, destination, quantity, price);
