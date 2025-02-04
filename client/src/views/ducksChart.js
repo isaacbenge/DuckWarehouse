@@ -41,10 +41,12 @@ export default class DucksChart extends Component {
         e.preventDefault();
         const { selectedDuck } = this.state;
 
-        let obj = { ...this.state.duckObj };
+        let obj = { ...this.state.duckObj, 
+            // deleted:false 
+        };
         console.log('Submitting duck object:', obj);  // Log the submitted data
         if (selectedDuck) {
-            selectedDuck.updateJson(obj);
+            selectedDuck.updateJson(obj, true);
 
             //refresh the page quickly
             this.setState({});
@@ -95,7 +97,8 @@ export default class DucksChart extends Component {
         let warehouse = this.props.warehouse;
         warehouse.removeDuckfromList(duck);
 
-        this.setState({ warningMessage: true });
+        // this.setState({ warningMessage: true });
+        this.resetForm();
     };
 
     getSoftBackground(color) {
@@ -210,6 +213,7 @@ export default class DucksChart extends Component {
                     </thead>
                     <tbody className="main-row">
                         {ducks
+                        .sort((a, b) => b.getJson().quantity - a.getJson().quantity)
                         .filter((duck) => !duck.getJson().deleted)
                         .map((duck) => (
                             <tr key={duck.getJson()._id} className="table-row">

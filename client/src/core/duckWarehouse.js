@@ -61,7 +61,7 @@ export default class DuckWarehouse extends BaseClass {
         let verified = this.getDuckColorandSize(obj);
 
         if (verified) {
-            verified.updateQuantity();
+            verified.updateQuantity(obj.quantity);
         }
 
         return verified
@@ -73,8 +73,10 @@ export default class DuckWarehouse extends BaseClass {
         }
 
         let verified = this.verifyDuck(data);
-        let newDuck = verified;
-        if (!verified) {
+       debugger
+        let newDuck = verified?.getJson().deleted? undefined:verified;
+
+        if (!newDuck) {
             newDuck = this.factory.create('duck', data);
             this.json.ducklist.push(newDuck);
 
@@ -99,7 +101,6 @@ export default class DuckWarehouse extends BaseClass {
     }
 
 
-
     async removeDuckfromList(duck) {
         try {
             // Update 'deleted' to true in the backend
@@ -118,12 +119,13 @@ export default class DuckWarehouse extends BaseClass {
 
 
     getDuckColorandSize(obj) {
-        const { color, size } = obj;
+        const { color, size, price } = obj;
         let returnDuck = undefined;
         for (let i = 0; i < this.json.ducklist.length; i++) {
             const duck = this.json.ducklist[i];
-            const dJson = duck.getJson();
-            if (dJson.color === color && dJson.size === size) {
+            const duckJson = duck.getJson();
+            
+            if (duckJson.color === color && duckJson.size === size &&  duckJson.price === price) {
                 returnDuck = duck;
             }
         }

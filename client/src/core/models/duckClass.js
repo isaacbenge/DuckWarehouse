@@ -12,8 +12,9 @@ export default class Duck extends BaseClass {
         deleted:false,
     }
 
-    updateQuantity(){
-        this.updateJson({quantity:this.json.quantity + 1 });
-        //Isaac this needs to Update  APIService.js    
+    updateQuantity(quantity){
+        this.updateJson({quantity:this.json.quantity + parseInt(quantity) }, true);
+        //if duck already in Chart add val you typed
     }
+
 }

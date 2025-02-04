@@ -1,3 +1,4 @@
+import APIService from '../../services/APIService.js';
 import IdService from './../../services/idService.js';
 
 
@@ -20,8 +21,12 @@ export default class BaseClass {
         this.json = obj
     }
 
-    updateJson(obj) {
+    updateJson(obj, updateBackend) {
         this.json = { ...this.json, ...obj, }
+
+        if (updateBackend){
+            APIService.updateDuck(this.json._id, this.json)
+        }
     }
 
     remove() {
