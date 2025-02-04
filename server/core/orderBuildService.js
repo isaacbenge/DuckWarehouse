@@ -37,7 +37,7 @@ export default class OrderBuilderService {
 
         let packType = packFact.create(packageMode);
         
-        console.log(dest+"::"+ship+"::"+packType);
+        // console.log(dest+"::"+ship+"::"+packType); //test
 
         let order = new OrderClass();
         order.updateJson({
