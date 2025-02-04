@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 class APIService {
-    static baseUrl = "http://localhost:5000/api/store/ducks";
+    static baseUrl = "http://localhost:3001/api/store/ducks";
 
     static async fetchDucks() {
         try {
