@@ -5,7 +5,7 @@ import storeRoutes from './routes/storeRoutes.js';
 
 
 const app = express();
-const port = 5000;
+const port = 3001;
 
 app.use(cors());
 app.use(express.json());  // Use raw "JSON" not Text
